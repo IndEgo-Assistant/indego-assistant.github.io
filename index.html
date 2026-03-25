@@ -1,90 +1,196 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>IndEgo Assistant</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IndEgo Assistant</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            color: #24292e;
+            line-height: 1.6;
+        }
+
+        .project-header {
+            text-align: center;
+            padding: 40px 20px;
+            max-width: 900px;
+            margin: 40px auto;
+        }
+
+        .project-header h1 {
+            font-size: 2.4em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .project-header h2 {
+            font-size: 1.2em;
+            font-weight: normal;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        .authors {
+            font-size: 1.05em;
+            margin-bottom: 10px;
+        }
+
+        .affiliations {
+            font-size: 0.95em;
+            color: #586069;
+            margin-bottom: 15px;
+        }
+
+        .conference {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin: 20px 0;
+        }
+
+        .links {
+            margin-top: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 18px;
+            background-color: #24292e;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 25px;
+            margin: 5px;
+        }
+
+        .button:hover {
+            background-color: #4a525a;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            border-bottom: 1px solid #e1e4e8;
+            padding-bottom: 8px;
+            margin-top: 40px;
+        }
+
+        .intro-text {
+            text-align: center;
+            font-size: 1.1em;
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+        }
+
+        .main-figure {
+            width: 100%;
+            max-width: 900px;
+            display: block;
+            margin: 30px auto;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .bibtex {
+            background: #f6f8fa;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.85em;
+        }
+
+    </style>
 </head>
 
 <body>
 
-<div class="container">
+<header class="project-header">
 
-  <!-- Title -->
-  <h1>IndEgo Assistant</h1>
+    <h1>IndEgo Assistant</h1>
 
-  <h2>
-    AI-based worker guidance in assembly and disassembly operations using<br>
-    multimodal ego/exo-centric data capture and structured task knowledge
-  </h2>
+    <h2>
+        AI-based worker guidance in assembly and disassembly operations using<br>
+        multimodal ego/exo-centric data capture and structured task knowledge
+    </h2>
 
-  <!-- Authors -->
-  <p class="authors">
-    Vivek Chavan<sup>a,b</sup>, Jörg Krüger<sup>a,b*</sup><br><br>
-    <span class="affiliation">
-      <sup>a</sup> Fraunhofer Institute for Production Systems and Design Technology IPK, Germany<br>
-      <sup>b</sup> Technical University of Berlin, Germany
-    </span>
-  </p>
+    <div class="authors">
+        Vivek Chavan<sup>a,b</sup>, Jörg Krüger<sup>a,b*</sup>
+    </div>
 
-  <!-- Links -->
-  <div class="links">
-    <a href="#">📄 Paper</a>
-    <a href="#">💻 Code</a>
-    <a href="#">📊 Dataset</a>
-  </div>
+    <div class="affiliations">
+        <sup>a</sup> Fraunhofer IPK, Germany &nbsp;&nbsp;&nbsp;
+        <sup>b</sup> Technical University of Berlin, Germany
+    </div>
 
-  <!-- Teaser -->
-  <div class="section">
-    <img src="assets/teaser.png" class="teaser">
-  </div>
+    <div class="conference">
+        CIRP Annals 2026
+    </div>
 
-  <!-- Abstract -->
-  <div class="section">
-    <h3>Abstract</h3>
-    <p>
-      Assembly and disassembly processes rely on expert knowledge that is difficult to document, reuse, and transfer. This paper presents a data-centric approach for extracting structured task knowledge from expert demonstrations using egocentric and exocentric recordings. Temporal and multimodal information from video and narration is jointly encoded to derive structured task representations that enable procedural documentation and context-aware worker guidance. The approach is evaluated on a real-world disassembly case study, demonstrating that video-based representations capture procedural structure and execution context beyond static image-based methods. The results highlight the potential of egocentric video understanding for repair, training, and circular manufacturing applications.
+    <div class="links">
+        <a href="#" class="button"><i class="fas fa-file-pdf"></i> Paper</a>
+        <a href="#" class="button"><i class="fab fa-github"></i> Code</a>
+    </div>
+
+</header>
+
+<main>
+
+    <p class="intro-text">
+        <strong>IndEgo Assistant</strong> introduces an AI-based system for worker guidance in industrial 
+        assembly and disassembly scenarios, leveraging multimodal egocentric and exocentric data 
+        together with structured task knowledge.
     </p>
-  </div>
 
-  <!-- Method -->
-  <div class="section">
-    <h3>Method Overview</h3>
-    <img src="assets/pipeline.png" class="pipeline">
-  </div>
+    <!-- MAIN FIGURE -->
+    <img src="assets/summary.png" alt="System Overview" class="main-figure">
 
-  <!-- Contributions -->
-  <div class="section">
-    <h3>Key Contributions</h3>
-    <ul>
-      <li>Multimodal ego/exo-centric data capture for industrial assembly and disassembly scenarios</li>
-      <li>Integration of structured task knowledge for process-aware worker guidance</li>
-      <li>AI-based assistance system enabling contextual understanding in real-world environments</li>
-    </ul>
-  </div>
+    <section>
+        <h2>Overview</h2>
+        <p>
+            Assembly and disassembly processes rely on expert knowledge that is difficult to document, reuse, and transfer. This paper presents a data-centric approach for extracting structured task knowledge from expert demonstrations using egocentric and exocentric recordings. Temporal and multimodal information from video and narration is jointly encoded to derive structured task representations that enable procedural documentation and context-aware worker guidance. The approach is evaluated on a real-world disassembly case study, demonstrating that video-based representations capture procedural structure and execution context beyond static image-based methods. The results highlight the potential of egocentric video understanding for repair, training, and circular manufacturing applications.
+        </p>
+    </section>
 
-  <!-- Video -->
-  <div class="section">
-    <h3>Demo</h3>
-    <video controls width="100%">
-      <source src="assets/demo.mp4" type="video/mp4">
-    </video>
-  </div>
+    <section>
+        <h2>Key Contributions</h2>
+        <ul>
+            <li>Multimodal ego/exo-centric data capture for industrial environments</li>
+            <li>Integration of structured task knowledge for process-aware guidance</li>
+            <li>AI-based system for real-world assembly and disassembly assistance</li>
+        </ul>
+    </section>
 
-  <!-- Citation -->
-  <div class="section">
-    <h3>Citation</h3>
-    <pre>
+    <section>
+        <h2>Citation</h2>
+        <div class="bibtex">
 @article{chavan2026indego,
   title={AI-based worker guidance in assembly and disassembly operations using multimodal ego/exo-centric data capture and structured task knowledge},
   author={Chavan, Vivek and Krüger, Jörg},
   journal={CIRP Annals},
   year={2026}
 }
-    </pre>
-  </div>
+        </div>
+    </section>
 
-</div>
+</main>
 
 </body>
 </html>
