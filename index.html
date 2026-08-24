@@ -145,8 +145,19 @@
     </div>
 
     <div class="links">
-        <a href="#" class="button"><i class="fas fa-file-pdf"></i> Paper</a>
-        <a href="#" class="button"><i class="fab fa-github"></i> Code</a>
+        <a href="https://doi.org/10.1016/j.cirp.2026.04.066"
+           class="button"
+           target="_blank"
+           rel="noopener noreferrer">
+            <i class="fas fa-file-pdf"></i> Paper
+        </a>
+        
+        <a href="https://github.com/IndEgo-Assistant/indego-procedure-assistant"
+           class="button"
+           target="_blank"
+           rel="noopener noreferrer">
+            <i class="fab fa-github"></i> Code
+        </a>
     </div>
 
 </header>
@@ -154,9 +165,13 @@
 <main>
 
     <p class="intro-text">
-        <strong>IndEgo Assistant</strong> introduces an AI-based system for worker guidance in industrial 
-        assembly and disassembly scenarios, leveraging multimodal egocentric and exocentric data 
-        together with structured task knowledge.
+        <strong>IndEgo Assistant</strong> learns structured industrial procedures
+        from expert demonstrations and reuses that knowledge for context-aware
+        worker guidance. Synchronized egocentric and exocentric video captures
+        complementary hand-object and workspace-level evidence, while expert
+        narration provides procedural intent. The system converts these signals
+        into step-aligned video representations, validated precedence graphs, and
+        instructions for online action recognition and valid next-step guidance.
     </p>
 
     <!-- MAIN FIGURE -->
@@ -172,9 +187,29 @@
     <section>
         <h2>Key Contributions</h2>
         <ul>
-            <li>Multimodal ego/exo-centric data capture for industrial environments</li>
-            <li>Integration of structured task knowledge for process-aware guidance</li>
-            <li>AI-based system for real-world assembly and disassembly assistance</li>
+            <li>
+                A multimodal procedure-learning pipeline combining egocentric video,
+                exocentric workspace observations, expert narration, and optional
+                egocentric eye gaze.
+            </li>
+            <li>
+                Support for ego-only, exo-only, and combined ego–exo configurations,
+                enabling systematic study of complementary camera perspectives.
+            </li>
+            <li>
+                Automatic extraction of procedural steps, temporal boundaries,
+                instructions, and non-linear precedence constraints from expert
+                demonstrations.
+            </li>
+            <li>
+                Frozen V-JEPA 2 representations with retrieval-based recognition for
+                one demonstration and lightweight task adaptation for multiple
+                demonstrations.
+            </li>
+            <li>
+                Graph-constrained online worker guidance supporting sequential and
+                parallel execution paths.
+            </li>
         </ul>
     </section>
 
