@@ -117,6 +117,127 @@
             font-size: 0.85em;
         }
 
+        .pipeline-intro {
+            max-width: 850px;
+            margin: 0 auto 30px auto;
+        }
+        
+        .pipeline-phase {
+            margin: 45px 0;
+        }
+        
+        .pipeline-phase h3 {
+            font-size: 1.45em;
+            margin-bottom: 10px;
+        }
+        
+        .phase-label {
+            display: inline-block;
+            padding: 4px 12px;
+            margin-bottom: 8px;
+            border-radius: 20px;
+            background: #eef4ea;
+            color: #356b2f;
+            font-size: 0.85em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        
+        .phase-label.online {
+            background: #eaf2fb;
+            color: #245f99;
+        }
+        
+        .figure-caption {
+            max-width: 900px;
+            margin: -20px auto 30px auto;
+            color: #586069;
+            font-size: 0.9em;
+            text-align: center;
+        }
+        
+        .stage-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 25px;
+        }
+        
+        .stage-card {
+            position: relative;
+            padding: 20px 20px 18px 58px;
+            border: 1px solid #dfe3e8;
+            border-radius: 10px;
+            background: #ffffff;
+            box-shadow: 0 2px 8px rgba(27, 31, 35, 0.05);
+        }
+        
+        .stage-card h4 {
+            margin: 0 0 7px 0;
+            font-size: 1.05em;
+        }
+        
+        .stage-card p {
+            margin: 0;
+            color: #444;
+            font-size: 0.95em;
+        }
+        
+        .stage-letter {
+            position: absolute;
+            top: 18px;
+            left: 16px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #3f7f36;
+            color: white;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .online-stage .stage-letter {
+            background: #2f6fa9;
+        }
+        
+        .view-modes {
+            margin: 25px 0;
+            padding: 18px 22px;
+            border-left: 4px solid #2f6fa9;
+            background: #f6f9fc;
+            border-radius: 4px;
+        }
+        
+        .view-modes h4 {
+            margin: 0 0 8px 0;
+        }
+        
+        .model-summary {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+        }
+        
+        .model-summary th,
+        .model-summary td {
+            padding: 11px 12px;
+            border: 1px solid #dfe3e8;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        .model-summary th {
+            background: #f6f8fa;
+        }
+        
+        @media (max-width: 700px) {
+            .stage-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 
@@ -174,15 +295,283 @@
         instructions for online action recognition and valid next-step guidance.
     </p>
 
-    <!-- MAIN FIGURE -->
-    <img src="assets/cirp34new.png" alt="System Overview" class="main-figure">
-
-    <section>
-        <h2>Overview</h2>
-        <p>
-            Assembly and disassembly processes rely on expert knowledge that is difficult to document, reuse, and transfer. This paper presents a data-centric approach for extracting structured task knowledge from expert demonstrations using egocentric and exocentric recordings. Temporal and multimodal information from video and narration is jointly encoded to derive structured task representations that enable procedural documentation and context-aware worker guidance. The approach is evaluated on a real-world disassembly case study, demonstrating that video-based representations capture procedural structure and execution context beyond static image-based methods. The results highlight the potential of egocentric video understanding for repair, training, and circular manufacturing applications.
+    <section id="pipeline">
+        <h2>System Pipeline</h2>
+    
+        <p class="pipeline-intro">
+            IndEgo Assistant consists of two connected phases. During
+            <strong>offline procedure learning</strong>, multimodal expert
+            demonstrations are transformed into validated task knowledge and
+            trainable video representations. During <strong>online worker
+            guidance</strong>, the resulting task model observes the worker,
+            tracks execution history, maps the current state onto the validated
+            procedure graph, and recommends the next valid action.
         </p>
+    
+        <!-- OFFLINE PHASE -->
+        <div class="pipeline-phase">
+            <span class="phase-label">Offline learning · A–G</span>
+            <h3>Learning Procedures from Expert Demonstrations</h3>
+    
+            <p>
+                The offline pipeline captures how an expert performs and explains
+                an industrial procedure. Speech, video, gaze, and complementary
+                camera perspectives are temporally aligned to produce step-level
+                training examples and structured procedural knowledge.
+            </p>
+    
+            <img
+                src="assets/Figure_2.png"
+                alt="Offline procedure-learning pipeline from expert demonstrations"
+                class="main-figure"
+            >
+    
+            <p class="figure-caption">
+                <strong>Offline procedure learning.</strong> Raw expert
+                demonstrations are converted into a reviewed procedure graph,
+                step-aligned video–label pairs, and a multimodal task model.
+            </p>
+    
+            <div class="stage-grid">
+                <article class="stage-card">
+                    <span class="stage-letter">A</span>
+                    <h4>Expert Demonstration Capture</h4>
+                    <p>
+                        An expert performs the assembly or disassembly procedure
+                        while synchronized egocentric video, exocentric video,
+                        audio narration, and optional eye gaze are recorded.
+                        Egocentric video captures the worker's interaction
+                        perspective, while exocentric cameras provide complementary
+                        workspace and process context.
+                    </p>
+                </article>
+    
+                <article class="stage-card">
+                    <span class="stage-letter">B</span>
+                    <h4>Speech Transcription</h4>
+                    <p>
+                        WhisperX converts the expert's spoken narration into a
+                        temporally aligned transcript. Word- and segment-level
+                        timestamps connect procedural descriptions to the
+                        corresponding moments in the recordings.
+                    </p>
+                </article>
+    
+                <article class="stage-card">
+                    <span class="stage-letter">C</span>
+                    <h4>Video Segmentation and Synchronization</h4>
+                    <p>
+                        The recordings are divided into candidate procedural
+                        segments using the transcript-derived temporal boundaries.
+                        Ego video, exo video, narration, and gaze samples are
+                        synchronized so that every segment refers to the same
+                        execution interval.
+                    </p>
+                </article>
+    
+                <article class="stage-card">
+                    <span class="stage-letter">D</span>
+                    <h4>Procedure and Task-Graph Extraction</h4>
+                    <p>
+                        A reasoning language model converts the structured
+                        transcript into step labels, procedural instructions, and
+                        an initial precedence graph. The graph represents valid
+                        ordering constraints, including sequential, parallel, and
+                        alternative execution paths.
+                    </p>
+                </article>
+    
+                <article class="stage-card">
+                    <span class="stage-letter">E</span>
+                    <h4>Expert Review</h4>
+                    <p>
+                        A human expert reviews the automatically generated steps,
+                        instructions, temporal boundaries, and graph edges. This
+                        validation stage prevents uncertain language-model outputs
+                        from becoming authoritative process constraints.
+                    </p>
+                </article>
+    
+                <article class="stage-card">
+                    <span class="stage-letter">F</span>
+                    <h4>Video Representation and Task Adaptation</h4>
+                    <p>
+                        Step-aligned clips are encoded using a frozen V-JEPA 2
+                        video backbone. With one demonstration, the system stores
+                        representations in a retrieval memory bank. With multiple
+                        demonstrations, a lightweight task-specific classifier can
+                        be trained over the frozen representations.
+                    </p>
+                </article>
+    
+                <article class="stage-card">
+                    <span class="stage-letter">G</span>
+                    <h4>Multimodal Task Model</h4>
+                    <p>
+                        The validated procedure graph, procedural instructions,
+                        video representations, view configuration, and recognition
+                        component are packaged into a reusable task model for
+                        online assistance.
+                    </p>
+                </article>
+            </div>
+        </div>
+    
+        <!-- EGO / EXO EXPLANATION -->
+        <div class="view-modes">
+            <h4>Egocentric, Exocentric, and Gaze-Aware Understanding</h4>
+            <p>
+                The implementation supports three evaluation modes:
+                <strong>ego only</strong>, <strong>exo only</strong>, and
+                <strong>ego + exo</strong>. Egocentric video provides detailed
+                hand–object interaction evidence from the worker's perspective.
+                Exocentric video provides a wider view of the workspace, object
+                arrangement, body motion, and events that may fall outside the
+                egocentric field of view. In the combined configuration, both
+                perspectives are fused into a fixed multimodal representation.
+            </p>
+            <p>
+                Eye gaze is available only for the egocentric stream. It is used
+                to construct a gaze-centred or foveal visual representation that
+                complements the full egocentric frame. In exo-only experiments,
+                the gaze feature and its availability mask are explicitly
+                disabled.
+            </p>
+        </div>
+    
+        <!-- ONLINE PHASE -->
+        <div class="pipeline-phase">
+            <span class="phase-label online">Online guidance · H–K</span>
+            <h3>Context-Aware Worker Assistance</h3>
+    
+            <p>
+                During deployment, the system observes the worker's current
+                activity and relates it to both the execution history and the
+                validated procedure graph. Guidance is therefore conditioned not
+                only on visual similarity, but also on which steps are currently
+                permitted by the task structure.
+            </p>
+    
+            <img
+                src="assets/cirp34new.png"
+                alt="Online context-aware worker-guidance pipeline"
+                class="main-figure"
+            >
+    
+            <p class="figure-caption">
+                <strong>Online worker guidance.</strong> Live observations are
+                mapped to the learned procedure, combined with execution history,
+                and used to identify the next valid action.
+            </p>
+    
+            <div class="stage-grid">
+                <article class="stage-card online-stage">
+                    <span class="stage-letter">H</span>
+                    <h4>Live Worker Observation</h4>
+                    <p>
+                        The worker's ongoing activity is captured as a stream of
+                        short video clips. Depending on the deployment setup, the
+                        system can use egocentric observations, exocentric
+                        observations, or both, with optional gaze available for
+                        the egocentric view.
+                    </p>
+                </article>
+    
+                <article class="stage-card online-stage">
+                    <span class="stage-letter">I</span>
+                    <h4>Action Recognition and History Update</h4>
+                    <p>
+                        The multimodal task model compares the current observation
+                        with its learned step representations and predicts or
+                        retrieves the most likely procedural step. Confirmed steps
+                        are added to the execution history, creating a persistent
+                        representation of progress through the task.
+                    </p>
+                </article>
+    
+                <article class="stage-card online-stage">
+                    <span class="stage-letter">J</span>
+                    <h4>Procedure Mapping and Planning</h4>
+                    <p>
+                        The recognized action and execution history are mapped onto
+                        the reviewed procedure graph. The planner identifies which
+                        successor steps have satisfied prerequisites and are
+                        therefore valid at the current point in the procedure.
+                    </p>
+                </article>
+    
+                <article class="stage-card online-stage">
+                    <span class="stage-letter">K</span>
+                    <h4>Next-Step Guidance</h4>
+                    <p>
+                        The system presents one or more valid next actions together
+                        with the corresponding procedural instructions. The
+                        language model may adapt the wording of the guidance, but
+                        it cannot override the constraints encoded in the
+                        expert-validated procedure graph.
+                    </p>
+                </article>
+            </div>
+        </div>
+    
+        <h3>Models and Their Roles</h3>
+    
+        <table class="model-summary">
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Role in the pipeline</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>WhisperX</td>
+                    <td>
+                        Transcribes expert narration and associates the text with
+                        temporal boundaries in the demonstration.
+                    </td>
+                </tr>
+                <tr>
+                    <td>Llama 3.1</td>
+                    <td>
+                        Extracts procedural steps, instructions, and candidate
+                        precedence relations, and can phrase online guidance.
+                    </td>
+                </tr>
+                <tr>
+                    <td>V-JEPA 2</td>
+                    <td>
+                        Produces video representations for ego-global,
+                        ego-gaze-foveal, and exo-global observations.
+                    </td>
+                </tr>
+                <tr>
+                    <td>Memory bank or linear probe</td>
+                    <td>
+                        Recognizes task steps using retrieval when data is scarce
+                        or lightweight supervised adaptation when multiple
+                        demonstrations are available.
+                    </td>
+                </tr>
+                <tr>
+                    <td>Validated procedure graph</td>
+                    <td>
+                        Constrains planning to steps whose procedural prerequisites
+                        have been satisfied.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </section>
+    
+        
+    
+        <section>
+            <h2>Overview</h2>
+            <p>
+                Assembly and disassembly processes rely on expert knowledge that is difficult to document, reuse, and transfer. This paper presents a data-centric approach for extracting structured task knowledge from expert demonstrations using egocentric and exocentric recordings. Temporal and multimodal information from video and narration is jointly encoded to derive structured task representations that enable procedural documentation and context-aware worker guidance. The approach is evaluated on a real-world disassembly case study, demonstrating that video-based representations capture procedural structure and execution context beyond static image-based methods. The results highlight the potential of egocentric video understanding for repair, training, and circular manufacturing applications.
+            </p>
+        </section>
 
     <section>
         <h2>Key Contributions</h2>
